@@ -38,7 +38,6 @@ new Promise(function(resolve) {
                     reject(new Error(response.error.error_msg));
                 } else {
                     var friendsArray = response.response;
-                    // var allFriendsList = document.getElementById("allFriendsList");
                     friendsArray.forEach(function(item, i) {
                         var li = document.createElement("li");
                         li.className = 'all_friends_list_item';
@@ -135,7 +134,6 @@ new Promise(function(resolve) {
                             var filteredResArray = [];
                             filteredResArray = filteredFriendsArray.filter(function (item) {
                                 if (e.target.value) {
-                                    console.log('right');
                                     return (item.first_name.toLowerCase().indexOf(e.target.value.trim().toLowerCase()) !== -1) || (item.last_name.toLowerCase().indexOf(e.target.value.trim().toLowerCase()) !== -1);
                                 } else {
                                     return filteredFriendsArray;
@@ -166,8 +164,8 @@ new Promise(function(resolve) {
 
                     })
 
+
                      allFriendsList.addEventListener('dragstart', function (e) {
-                        console.log(1);
                         if (e.target.className == 'all_friends_list_item') {
                             e.dataTransfer.effectAllowed = "move";
                             e.dataTransfer.setData("text/plain", e.target.id);                            
@@ -175,17 +173,62 @@ new Promise(function(resolve) {
                      })
 
                      filteredFriendsList.addEventListener('drop', function (e) {
-                        console.log(2);
                         e.preventDefault();
                         var data = e.dataTransfer.getData("text");
-                        e.target.appendChild(document.getElementById(data));                         
+                        var li = document.getElementById(data);
+                        filteredFriendsList.insertBefore(li, filteredFriendsList.children[0]);
+                        li.className = "filtered_friends_list_item";
+                        li.removeChild(li.getElementsByClassName('friend_add')[0]);
+                        var friendRemove = document.createElement('div');
+                        friendRemove.className = 'friend_remove';
+                        li.appendChild(friendRemove);
+                        friendsArray.forEach( function(item, i) {
+                            if ('id' + item.uid == data) {
+                                filteredFriendsArray.splice(0, 0, item);
+                                friendsArray.splice(i, 1);
+                            }
+                        })                        
                      })
 
                      filteredFriendsList.addEventListener('dragover', function (e) {
-                        console.log(3);
                         e.preventDefault();
                         e.dataTransfer.dropEffect = "move";                                                
                      }) 
+
+
+                     filteredFriendsList.addEventListener('dragstart', function (e) {
+                        if (e.target.className == 'filtered_friends_list_item') {
+                            e.dataTransfer.effectAllowed = "move";
+                            e.dataTransfer.setData("text/plain", e.target.id);                            
+                          }
+                     })
+
+                     allFriendsList.addEventListener('drop', function (e) {
+                        e.preventDefault();
+                        var data = e.dataTransfer.getData("text");
+                        var li = document.getElementById(data);
+                        allFriendsList.insertBefore(li, allFriendsList.children[0]);
+                        li.className = "all_friends_list_item";
+                        li.removeChild(li.getElementsByClassName('friend_remove')[0]);
+                        var friendAdd = document.createElement('div');
+                        friendAdd.className = 'friend_add';
+                        li.appendChild(friendAdd);
+                        filteredFriendsArray.forEach( function(item, i) {
+                            if ('id' + item.uid == data) {
+                                friendsArray.splice(0, 0, item);
+                                filteredFriendsArray.splice(i, 1);
+                            }
+                        })                        
+                     })
+
+                     allFriendsList.addEventListener('dragover', function (e) {
+                        e.preventDefault();
+                        e.dataTransfer.dropEffect = "move";                                                
+                     }) 
+
+                     saveFriends.addEventListener('click', function () {
+                          /* body... */ 
+                     })
 
                     resolve();
 

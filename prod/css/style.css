@@ -110,6 +110,7 @@ body {
   padding-right: 15px; }
 
 .all_friends_list, .filtered_friends_list {
+  min-height: 356px;
   max-height: 356px;
   list-style-type: none;
   height: auto;
