@@ -1,0 +1,30 @@
+doctype html
+html(lang='ru-RU')
+	head
+		meta(charset='UTF-8')
+		meta(name='viewport' content='width=device-width, initial-scale=1.0')
+		link(rel='stylesheet' href='css/style.css')
+		link(rel="shortcut icon" href="images/favicon.ico" type="image/png")
+		script(src="http://vk.com/js/api/openapi.js" type="text/javascript")
+		title ДругоФильтр
+	body
+		.wrapper
+			.logo#logo
+			.popup#popup
+				.header
+					h1.header__header Выберите друзей
+					.close_popup#closePopup
+				.search#search
+					input(type="text" placeholder="Начните вводить имя друга").search_friends
+					input(type="text" placeholder="Название").search_filtered_friends
+				.friends#friends
+					.all_friends
+						h2.all_friends_header Ваши друзья
+						ul(class="all_friends_list" id="allFriendsList")
+					.filtered_friends
+						h2.filtered_friends_header Друзья в списке
+						ul.filtered_friends_list#filteredFriendsList
+				.footer
+					button.save_friends Сохранить
+		script(src="js/handlebars.js")
+		script(src="js/main.js")

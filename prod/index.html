@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/png">
+    <script src="http://vk.com/js/api/openapi.js" type="text/javascript"></script>
+    <title>ДругоФильтр</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div id="logo" class="logo"></div>
+      <div id="popup" class="popup">
+        <div class="header">
+          <h1 class="header__header">Выберите друзей</h1>
+          <div id="closePopup" class="close_popup"></div>
+        </div>
+        <div id="search" class="search">
+          <input type="text" placeholder="Начните вводить имя друга" class="search_friends">
+          <input type="text" placeholder="Название" class="search_filtered_friends">
+        </div>
+        <div id="friends" class="friends">
+          <div class="all_friends">
+            <h2 class="all_friends_header">Ваши друзья</h2>
+            <ul id="allFriendsList" class="all_friends_list"></ul>
+          </div>
+          <div class="filtered_friends">
+            <h2 class="filtered_friends_header">Друзья в списке</h2>
+            <ul id="filteredFriendsList" class="filtered_friends_list"></ul>
+          </div>
+        </div>
+        <div class="footer">
+          <button class="save_friends">Сохранить</button>
+        </div>
+      </div>
+    </div>
+    <script src="js/handlebars.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
