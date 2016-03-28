@@ -37,7 +37,18 @@ new Promise(function(resolve) {
                 if (response.error) {
                     reject(new Error(response.error.error_msg));
                 } else {
-                    var friendsArray = response.response;
+                    var friendsArray = [];
+                    var filteredFriendsArray = [];
+                      if (localStorage.friendsArray) {
+                        friendsArray = JSON.parse(localStorage.friendsArray);
+                        } else {
+                            friendsArray = response.response;
+                        }
+                    if (localStorage.filteredFriendsArray) {
+                        filteredFriendsArray = JSON.parse(localStorage.filteredFriendsArray);
+                    }  else {
+                        filteredFriendsArray = [];
+                    }
                     friendsArray.forEach(function(item, i) {
                         var li = document.createElement("li");
                         li.className = 'all_friends_list_item';
@@ -58,7 +69,25 @@ new Promise(function(resolve) {
                         allFriendsList.appendChild(li);
                     });
 
-                    var filteredFriendsArray = [];                    
+                     filteredFriendsArray.forEach(function(item, i) {
+                        var li = document.createElement("li");
+                        li.className = 'filtered_friends_list_item';
+                        li.id = "id" + item.uid;
+                        li.setAttribute('draggable', true);
+                        var friendPhoto = document.createElement("img");
+                        friendPhoto.className = 'friend_photo';
+                        friendPhoto.setAttribute('src', item.photo_50);
+                        friendPhoto.setAttribute('draggable', false);
+                        li.appendChild(friendPhoto);
+                        var friendName = document.createElement("div");
+                        friendName.className = 'friend_name';
+                        friendName.textContent = item.first_name + " " + item.last_name;
+                        li.appendChild(friendName);
+                        var friendRemove = document.createElement("div");
+                        friendRemove.className = 'friend_remove';
+                        li.appendChild(friendRemove);
+                        filteredFriendsList.appendChild(li);
+                    });
 
                      friends.addEventListener('click', function (e) {
                         e.preventDefault();
@@ -101,7 +130,6 @@ new Promise(function(resolve) {
                             var allResArray = [];
                             allResArray = friendsArray.filter(function (item) {
                                 if (e.target.value) {
-                                    console.log('left');
                                     return (item.first_name.toLowerCase().indexOf(e.target.value.trim().toLowerCase()) !== -1) || (item.last_name.toLowerCase().indexOf(e.target.value.trim().toLowerCase()) !== -1);
                                 } else {
                                     return friendsArray;
@@ -163,7 +191,6 @@ new Promise(function(resolve) {
                          }
 
                     })
-
 
                      allFriendsList.addEventListener('dragstart', function (e) {
                         if (e.target.className == 'all_friends_list_item') {
@@ -227,7 +254,10 @@ new Promise(function(resolve) {
                      }) 
 
                      saveFriends.addEventListener('click', function () {
-                          /* body... */ 
+                        localStorage.setItem('friendsArray', JSON.stringify(friendsArray));
+                        localStorage.setItem('filteredFriendsArray', JSON.stringify(filteredFriendsArray));
+                          // localStorage.friendsArray = friendsArray;
+                          // localStorage.filteredFriendsArray = filteredFriendsArray;                           
                      })
 
                     resolve();
