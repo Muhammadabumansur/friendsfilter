@@ -114,39 +114,12 @@ new Promise(function(resolve) {
                         e.preventDefault();
                         if (e.target.className == "friend_add") {
                             var li =  e.target.closest('li');
-
                             moveFriend(filteredFriendsList, allFriendsArray, filteredFriendsArray, li);
-                            // filteredFriendsList.insertBefore(li, filteredFriendsList.children[0]);
-                            // li.className = "filtered_friends_list_item";
-                            // li.removeChild(e.target);
-                            // var friendRemove = document.createElement('div');
-                            // friendRemove.className = 'friend_remove';
-                            //  li.appendChild(friendRemove);
-                            // allFriendsArray.forEach( function(item, i) {
-                            //     if ('id' + item.uid == li.id) {
-                            //         filteredFriendsArray.splice(0, 0, item);
-                            //         allFriendsArray.splice(i, 1);
-                            //     }
-                            // })
-
                         }
 
                         if (e.target.className == "friend_remove") {
                             var li =  e.target.closest('li');
-
                             moveFriend(allFriendsList, filteredFriendsArray, allFriendsArray, li);
-                            // allFriendsList.insertBefore(li, allFriendsList.children[0]);
-                            // li.className = "all_friends_list_item";
-                            // li.removeChild(e.target);
-                            // var friendAdd = document.createElement('div');
-                            // friendAdd.className = 'friend_add';
-                            // li.appendChild(friendAdd);
-                            // filteredFriendsArray.forEach( function(item, i) {
-                            //     if ('id' + item.uid == li.id) {
-                            //         allFriendsArray.splice(0, 0, item);
-                            //         filteredFriendsArray.splice(i, 1);
-                            //     }
-                            // })
                         }
                     });
 
@@ -196,20 +169,7 @@ new Promise(function(resolve) {
                         e.preventDefault();
                         var data = e.dataTransfer.getData("text");
                         var li = document.getElementById(data);
-
                         moveFriend(filteredFriendsList, allFriendsArray, filteredFriendsArray, li);
-                        // filteredFriendsList.insertBefore(li, filteredFriendsList.children[0]);
-                        // li.className = "filtered_friends_list_item";
-                        // li.removeChild(li.getElementsByClassName('friend_add')[0]);
-                        // var friendRemove = document.createElement('div');
-                        // friendRemove.className = 'friend_remove';
-                        // li.appendChild(friendRemove);
-                        // allFriendsArray.forEach( function(item, i) {
-                        //     if ('id' + item.uid == data) {
-                        //         filteredFriendsArray.splice(0, 0, item);
-                        //         allFriendsArray.splice(i, 1);
-                        //     }
-                        // })                        
                      })
 
                      filteredFriendsList.addEventListener('dragover', function (e) {
@@ -229,20 +189,7 @@ new Promise(function(resolve) {
                         e.preventDefault();
                         var data = e.dataTransfer.getData("text");
                         var li = document.getElementById(data);
-
                         moveFriend(allFriendsList, filteredFriendsArray, allFriendsArray, li);
-                        // allFriendsList.insertBefore(li, allFriendsList.children[0]);
-                        // li.className = "all_friends_list_item";
-                        // li.removeChild(li.getElementsByClassName('friend_remove')[0]);
-                        // var friendAdd = document.createElement('div');
-                        // friendAdd.className = 'friend_add';
-                        // li.appendChild(friendAdd);
-                        // filteredFriendsArray.forEach( function(item, i) {
-                        //     if ('id' + item.uid == data) {
-                        //         allFriendsArray.splice(0, 0, item);
-                        //         filteredFriendsArray.splice(i, 1);
-                        //     }
-                        // })                        
                      })
 
                      allFriendsList.addEventListener('dragover', function (e) {
