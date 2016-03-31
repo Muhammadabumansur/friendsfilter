@@ -128,7 +128,7 @@ new Promise(function(resolve) {
                             var allResArray = [];
                             allResArray = allFriendsArray.filter(function (item) {
                                 if (e.target.value) {
-                                    return (item.first_name.toLowerCase().indexOf(e.target.value.trim().toLowerCase()) !== -1) || (item.last_name.toLowerCase().indexOf(e.target.value.trim().toLowerCase()) !== -1);
+                                    return ((item.first_name.toLowerCase()+" "+item.last_name.toLowerCase()).indexOf(e.target.value.trim().toLowerCase()) !== -1);
                                 } else {
                                     return allFriendsArray;
                                 }                 
@@ -144,7 +144,7 @@ new Promise(function(resolve) {
                             var filteredResArray = [];
                             filteredResArray = filteredFriendsArray.filter(function (item) {
                                 if (e.target.value) {
-                                    return (item.first_name.toLowerCase().indexOf(e.target.value.trim().toLowerCase()) !== -1) || (item.last_name.toLowerCase().indexOf(e.target.value.trim().toLowerCase()) !== -1);
+                                    return ((item.first_name.toLowerCase()+" "+item.last_name.toLowerCase()).indexOf(e.target.value.trim().toLowerCase()) !== -1);
                                 } else {
                                     return filteredFriendsArray;
                                 }                 
