@@ -42,7 +42,7 @@ new Promise(function(resolve) {
 
                     function renderFriends(friendStatus, item) {
                         var li = document.createElement("li");
-                        li.id = "id" + item.uid;
+                        li.setAttribute('data-id', item.uid);
                         li.setAttribute('draggable', true);
                         var friendPhoto = document.createElement("img");
                         friendPhoto.className = 'friend_photo';
@@ -85,7 +85,7 @@ new Promise(function(resolve) {
                             }
                             li.appendChild(friendMove);
                             friendsArray.forEach(function(item, i) {
-                                    if ('id' + item.uid == li.id) {
+                                    if (item.uid == li.getAttribute('data-id')) {
                                             otherArray.splice(0, 0, item);
                                             friendsArray.splice(i, 1);
                                     }
@@ -161,14 +161,14 @@ new Promise(function(resolve) {
                      allFriendsList.addEventListener('dragstart', function (e) {
                         if (e.target.className == 'all_friends_list_item') {
                             e.dataTransfer.effectAllowed = "move";
-                            e.dataTransfer.setData("text/plain", e.target.id);                            
+                            e.dataTransfer.setData("text/plain", e.target.getAttribute('data-id')); 
                           }
                      })
 
                      filteredFriendsList.addEventListener('drop', function (e) {
                         e.preventDefault();
                         var data = e.dataTransfer.getData("text");
-                        var li = document.getElementById(data);
+                        var li = document.querySelector('li[data-id="' + data + '"]');
                         moveFriend(filteredFriendsList, allFriendsArray, filteredFriendsArray, li);
                      })
 
@@ -181,14 +181,14 @@ new Promise(function(resolve) {
                      filteredFriendsList.addEventListener('dragstart', function (e) {
                         if (e.target.className == 'filtered_friends_list_item') {
                             e.dataTransfer.effectAllowed = "move";
-                            e.dataTransfer.setData("text/plain", e.target.id);                            
+                            e.dataTransfer.setData("text/plain", e.target.getAttribute('data-id')); 
                           }
                      })
 
                      allFriendsList.addEventListener('drop', function (e) {
                         e.preventDefault();
                         var data = e.dataTransfer.getData("text");
-                        var li = document.getElementById(data);
+                        var li = document.querySelector('li[data-id="' + data + '"]');
                         moveFriend(allFriendsList, filteredFriendsArray, allFriendsArray, li);
                      })
 
